@@ -28,7 +28,7 @@ python3 -m http.server 8765 --directory web
 Para ejecutar las pruebas:
 
 ```bash
-node --test web/tests/
+node --test web/tests/calculadora.test.cjs
 ```
 
 ## Publicación
