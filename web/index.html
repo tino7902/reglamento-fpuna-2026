@@ -111,10 +111,14 @@
             <p class="ayuda">Se usa para expresar en puntos el mínimo necesario para cada calificación.</p>
           </div>
           <div class="grupo">
-            <label class="ancho">Porcentaje obtenido en el recuperatorio (%) <span class="opcional">(opcional)</span>
+            <label class="casilla"><input type="checkbox" id="no-rendi" checked> Aún no rendí</label>
+            <p class="ayuda">Deje esta casilla marcada si solo quiere saber si habilita el examen final o si debe rendir recuperatorio.</p>
+          </div>
+          <div class="grupo">
+            <label class="ancho">Porcentaje obtenido en el recuperatorio (%)
               <input type="number" id="recuperatorio" min="0" max="100" step="any" inputmode="decimal">
             </label>
-            <p class="ayuda">Solo para quienes deben recuperar un parcial. El recuperatorio es el examen de la primera convocatoria del final; ingrese aquí el porcentaje obtenido, o uno estimado, para ver si habilita la segunda convocatoria.</p>
+            <p class="ayuda">Solo para quienes ya rindieron el recuperatorio, que es el examen de la primera convocatoria del final. Desmarque «Aún no rendí» e ingrese el porcentaje obtenido para ver si habilita la segunda convocatoria.</p>
           </div>
         </fieldset>
 

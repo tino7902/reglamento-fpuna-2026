@@ -71,6 +71,9 @@
     var conLab = el('tiene-lab').checked;
     document.querySelectorAll('.solo-lab').forEach(function (n) { n.hidden = !conLab; });
     [1, 2].forEach(dibujarPracticas);
+    var rec = el('recuperatorio');
+    rec.disabled = el('no-rendi').checked;
+    if (rec.disabled) rec.removeAttribute('aria-invalid');
     [1, 2].forEach(dibujarActividades);
     [1, 2].forEach(function (n) {
       var ausente = el('e' + n + '-ausente').checked;
@@ -149,7 +152,8 @@
     var asistencia = valor('asistencia', 'Asistencia a clases', { max: 100 });
     var pesoLab = tieneLab ? valor('peso-lab', 'Ponderación del laboratorio', { min: 15, max: 50 }) : 0;
     var finalTotal = valor('final-total', 'Puntaje total del examen final', { min: 1 });
-    var recuperatorio = valor('recuperatorio', 'Porcentaje obtenido en el recuperatorio', { opcional: true, max: 100 });
+    var recuperatorio = el('no-rendi').checked ? null
+      : valor('recuperatorio', 'Porcentaje obtenido en el recuperatorio', { opcional: true, max: 100 });
 
     if (tieneLab && !errores.length && etapas[0].lab.programadas + etapas[1].lab.programadas === 0) {
       errores.push('Indique cuántas prácticas de laboratorio hay programadas en al menos una etapa, o desmarque la casilla de laboratorios.');
