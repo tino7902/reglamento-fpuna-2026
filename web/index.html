@@ -18,11 +18,11 @@
     </div>
     <nav class="navegacion" aria-label="Secciones">
       <div class="contenedor">
+        <a href="#calculadora">Calculadora</a>
         <a href="#resumen">Resumen</a>
         <a href="#cambios">Cambios principales</a>
         <a href="#otros">Otros cambios</a>
         <a href="#asistencia-ealu">Consultar asistencia</a>
-        <a href="#calculadora">Calculadora</a>
       </div>
     </nav>
   </header>
@@ -32,6 +32,113 @@
     <aside class="aviso" role="note">
       <strong>Material informativo.</strong> Esta página fue elaborada por la Delegación de la Carrera de Ingeniería en Informática para facilitar la lectura del reglamento. No reemplaza al texto oficial: ante cualquier diferencia, prevalece la <a href="docs/reglamento-2026.pdf">Resolución N° 0439-00-2026</a> del Consejo Superior Universitario.
     </aside>
+
+    <!-- ====================== CALCULADORA ====================== -->
+    <section id="calculadora">
+      <h2>Calculadora de derecho a examen final</h2>
+      <p>Ingrese sus porcentajes obtenidos y su porcentaje de asistencia para saber si habilita el examen final, si debe rendir recuperatorio y cuánto necesita en el examen final para cada calificación. Los datos no se guardan ni se envían: el cálculo se hace en su propio dispositivo.</p>
+
+      <p class="aviso"><strong>Los puntajes se ingresan como porcentaje.</strong> Por ejemplo, si en un parcial obtuvo 10 puntos sobre 20, debe ingresar 50. Para calcularlo: puntos obtenidos ÷ puntos totales × 100.</p>
+
+      <form id="form-calculadora" class="formulario" novalidate>
+
+        <fieldset class="etapa" data-etapa="1">
+          <legend>Primera etapa</legend>
+          <div class="grupo">
+            <p class="grupo-titulo" id="e1-parcial-t">Primer parcial</p>
+            <label>Porcentaje obtenido (%) <input type="number" id="e1-parcial" min="0" max="100" step="any" inputmode="decimal" aria-labelledby="e1-parcial-t e1-parcial-l"><span id="e1-parcial-l" hidden>porcentaje obtenido</span></label>
+            <label class="casilla"><input type="checkbox" id="e1-ausente"> No me presenté a este parcial</label>
+          </div>
+          <div class="grupo">
+            <p class="grupo-titulo" id="e1-proc-t">Actividades sumativas de proceso</p>
+            <p class="ayuda">Tests, exámenes cortos, trabajos prácticos y demás actividades con puntaje de la etapa, sin contar el parcial<span class="solo-lab" hidden> ni el laboratorio</span>. Si no realizó alguna, ingrese 0.</p>
+            <label>Actividades sumativas en esta etapa <input type="number" id="e1-proc-cant" min="1" max="12" step="1" value="2" inputmode="numeric"></label>
+            <div id="e1-proc-actividades" class="practicas" role="group" aria-labelledby="e1-proc-t"></div>
+          </div>
+          <div class="grupo solo-lab" hidden>
+            <p class="grupo-titulo" id="e1-lab-t">Prácticas de laboratorio</p>
+            <label>Prácticas programadas en esta etapa <input type="number" id="e1-lab-prog" min="0" max="12" step="1" value="2" inputmode="numeric"></label>
+            <div id="e1-lab-practicas" class="practicas" role="group" aria-labelledby="e1-lab-t"></div>
+          </div>
+        </fieldset>
+
+        <fieldset class="etapa" data-etapa="2">
+          <legend>Segunda etapa</legend>
+          <div class="grupo">
+            <p class="grupo-titulo" id="e2-parcial-t">Segundo parcial</p>
+            <label>Porcentaje obtenido (%) <input type="number" id="e2-parcial" min="0" max="100" step="any" inputmode="decimal" aria-labelledby="e2-parcial-t e2-parcial-l"><span id="e2-parcial-l" hidden>porcentaje obtenido</span></label>
+            <label class="casilla"><input type="checkbox" id="e2-ausente"> No me presenté a este parcial</label>
+          </div>
+          <div class="grupo">
+            <p class="grupo-titulo" id="e2-proc-t">Actividades sumativas de proceso</p>
+            <p class="ayuda">Tests, exámenes cortos, trabajos prácticos y demás actividades con puntaje de la etapa, sin contar el parcial<span class="solo-lab" hidden> ni el laboratorio</span>. Si no realizó alguna, ingrese 0.</p>
+            <label>Actividades sumativas en esta etapa <input type="number" id="e2-proc-cant" min="1" max="12" step="1" value="2" inputmode="numeric"></label>
+            <div id="e2-proc-actividades" class="practicas" role="group" aria-labelledby="e2-proc-t"></div>
+          </div>
+          <div class="grupo solo-lab" hidden>
+            <p class="grupo-titulo" id="e2-lab-t">Prácticas de laboratorio</p>
+            <label>Prácticas programadas en esta etapa <input type="number" id="e2-lab-prog" min="0" max="12" step="1" value="2" inputmode="numeric"></label>
+            <div id="e2-lab-practicas" class="practicas" role="group" aria-labelledby="e2-lab-t"></div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Asistencia y laboratorio</legend>
+          <div class="grupo">
+            <label class="ancho">Asistencia a clases (%)
+              <input type="number" id="asistencia" min="0" max="100" step="any" inputmode="decimal">
+            </label>
+            <p class="ayuda">Es el valor de la columna «% ASIS» de eAlu. <a href="#asistencia-ealu">Cómo consultarlo</a>.</p>
+          </div>
+          <div class="grupo">
+            <label class="casilla"><input type="checkbox" id="tiene-lab"> ¿La materia cuenta con laboratorios?</label>
+            <p class="ayuda">Al marcar esta casilla se habilitan los campos de prácticas de laboratorio en cada etapa, con dos prácticas por etapa como valor inicial. Ingrese el porcentaje obtenido en cada práctica; si no asistió a alguna y no la recuperó, marque «No asistí».</p>
+          </div>
+          <div class="grupo solo-lab" hidden>
+            <label class="ancho">Ponderación del laboratorio en cada etapa (%)
+              <input type="number" id="peso-lab" min="15" max="50" step="any" value="15" inputmode="decimal">
+            </label>
+            <p class="ayuda">Figura en el Planeamiento de la Asignatura. El mínimo es 15% (Art. 12, inc. f). La calculadora lo aplica sobre el total de la etapa, dentro del 50% que corresponde a las actividades de proceso.</p>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Examen final</legend>
+          <div class="grupo">
+            <label class="ancho">Puntaje total del examen final
+              <input type="number" id="final-total" min="1" step="any" value="100" inputmode="decimal">
+            </label>
+            <p class="ayuda">Se usa para expresar en puntos el mínimo necesario para cada calificación.</p>
+          </div>
+          <div class="grupo">
+            <label class="ancho">Porcentaje obtenido en el recuperatorio (%) <span class="opcional">(opcional)</span>
+              <input type="number" id="recuperatorio" min="0" max="100" step="any" inputmode="decimal">
+            </label>
+            <p class="ayuda">Solo para quienes deben recuperar un parcial. El recuperatorio es el examen de la primera convocatoria del final; ingrese aquí el porcentaje obtenido, o uno estimado, para ver si habilita la segunda convocatoria.</p>
+          </div>
+        </fieldset>
+
+        <div id="errores" class="errores" role="alert" hidden></div>
+
+        <div class="acciones">
+          <button type="submit" class="boton">Calcular</button>
+          <button type="reset" class="boton secundario">Limpiar</button>
+        </div>
+      </form>
+
+      <div id="resultado" class="resultado" aria-live="polite" tabindex="-1"></div>
+
+      <details class="supuestos">
+        <summary>Criterios que aplica la calculadora</summary>
+        <ul>
+          <li><strong>Redondeo del PEP.</strong> El PEP se redondea al entero más próximo (por ejemplo, 59,5% pasa a 60%). El reglamento menciona el redondeo solo para el Rendimiento Porcentual (Art. 15, inc. c), por lo que la calculadora muestra una advertencia cuando el resultado depende del redondeo.</li>
+          <li><strong>Recuperatorio.</strong> La nota del recuperatorio reemplaza a la del parcial recuperado y con ella se vuelve a calcular el PEP.</li>
+          <li><strong>Actividades sumativas.</strong> Todas las actividades de una etapa tienen el mismo peso entre sí. Si en su asignatura tienen puntajes distintos, el resultado puede variar levemente.</li>
+          <li><strong>Laboratorio.</strong> Todas las prácticas de una etapa tienen el mismo peso entre sí. La ponderación indicada se aplica sobre el total de la etapa. Si en su asignatura se calcula de otra forma, el resultado puede variar.</li>
+          <li><strong>Otros requisitos.</strong> La calculadora no verifica sanciones disciplinarias ni los requisitos propios de cada asignatura (Art. 13, inc. b, núms. 4 y 5).</li>
+        </ul>
+      </details>
+    </section>
 
     <!-- ====================== RESUMEN ====================== -->
     <section id="resumen">
@@ -370,112 +477,6 @@
       <p class="fuente">Fuente: <a href="docs/instructivo-asistencia-ealu.pdf">«Visualización de Asistencia en eAlu», guía para estudiantes, DTIC FP-UNA, versión 1 (09/11/2026)</a>.</p>
     </section>
 
-    <!-- ====================== CALCULADORA ====================== -->
-    <section id="calculadora">
-      <h2>Calculadora de derecho a examen final</h2>
-      <p>Ingrese sus porcentajes obtenidos y su porcentaje de asistencia para saber si habilita el examen final, si debe rendir recuperatorio y cuánto necesita en el examen final para cada calificación. Los datos no se guardan ni se envían: el cálculo se hace en su propio dispositivo.</p>
-
-      <p class="aviso"><strong>Los puntajes se ingresan como porcentaje.</strong> Por ejemplo, si en un parcial obtuvo 10 puntos sobre 20, debe ingresar 50. Para calcularlo: puntos obtenidos ÷ puntos totales × 100.</p>
-
-      <form id="form-calculadora" class="formulario" novalidate>
-
-        <fieldset class="etapa" data-etapa="1">
-          <legend>Primera etapa</legend>
-          <div class="grupo">
-            <p class="grupo-titulo" id="e1-parcial-t">Primer parcial</p>
-            <label>Porcentaje obtenido (%) <input type="number" id="e1-parcial" min="0" max="100" step="any" inputmode="decimal" aria-labelledby="e1-parcial-t e1-parcial-l"><span id="e1-parcial-l" hidden>porcentaje obtenido</span></label>
-            <label class="casilla"><input type="checkbox" id="e1-ausente"> No me presenté a este parcial</label>
-          </div>
-          <div class="grupo">
-            <p class="grupo-titulo" id="e1-proc-t">Actividades sumativas de proceso</p>
-            <p class="ayuda">Tests, exámenes cortos, trabajos prácticos y demás actividades con puntaje de la etapa, sin contar el parcial<span class="solo-lab" hidden> ni el laboratorio</span>. Si no realizó alguna, ingrese 0.</p>
-            <label>Actividades sumativas en esta etapa <input type="number" id="e1-proc-cant" min="1" max="12" step="1" value="2" inputmode="numeric"></label>
-            <div id="e1-proc-actividades" class="practicas" role="group" aria-labelledby="e1-proc-t"></div>
-          </div>
-          <div class="grupo solo-lab" hidden>
-            <p class="grupo-titulo" id="e1-lab-t">Prácticas de laboratorio</p>
-            <label>Prácticas programadas en esta etapa <input type="number" id="e1-lab-prog" min="0" max="12" step="1" value="2" inputmode="numeric"></label>
-            <div id="e1-lab-practicas" class="practicas" role="group" aria-labelledby="e1-lab-t"></div>
-          </div>
-        </fieldset>
-
-        <fieldset class="etapa" data-etapa="2">
-          <legend>Segunda etapa</legend>
-          <div class="grupo">
-            <p class="grupo-titulo" id="e2-parcial-t">Segundo parcial</p>
-            <label>Porcentaje obtenido (%) <input type="number" id="e2-parcial" min="0" max="100" step="any" inputmode="decimal" aria-labelledby="e2-parcial-t e2-parcial-l"><span id="e2-parcial-l" hidden>porcentaje obtenido</span></label>
-            <label class="casilla"><input type="checkbox" id="e2-ausente"> No me presenté a este parcial</label>
-          </div>
-          <div class="grupo">
-            <p class="grupo-titulo" id="e2-proc-t">Actividades sumativas de proceso</p>
-            <p class="ayuda">Tests, exámenes cortos, trabajos prácticos y demás actividades con puntaje de la etapa, sin contar el parcial<span class="solo-lab" hidden> ni el laboratorio</span>. Si no realizó alguna, ingrese 0.</p>
-            <label>Actividades sumativas en esta etapa <input type="number" id="e2-proc-cant" min="1" max="12" step="1" value="2" inputmode="numeric"></label>
-            <div id="e2-proc-actividades" class="practicas" role="group" aria-labelledby="e2-proc-t"></div>
-          </div>
-          <div class="grupo solo-lab" hidden>
-            <p class="grupo-titulo" id="e2-lab-t">Prácticas de laboratorio</p>
-            <label>Prácticas programadas en esta etapa <input type="number" id="e2-lab-prog" min="0" max="12" step="1" value="2" inputmode="numeric"></label>
-            <div id="e2-lab-practicas" class="practicas" role="group" aria-labelledby="e2-lab-t"></div>
-          </div>
-        </fieldset>
-
-        <fieldset>
-          <legend>Asistencia y laboratorio</legend>
-          <div class="grupo">
-            <label class="ancho">Asistencia a clases (%)
-              <input type="number" id="asistencia" min="0" max="100" step="any" inputmode="decimal">
-            </label>
-            <p class="ayuda">Es el valor de la columna «% ASIS» de eAlu. <a href="#asistencia-ealu">Cómo consultarlo</a>.</p>
-          </div>
-          <div class="grupo">
-            <label class="casilla"><input type="checkbox" id="tiene-lab"> ¿La materia cuenta con laboratorios?</label>
-            <p class="ayuda">Al marcar esta casilla se habilitan los campos de prácticas de laboratorio en cada etapa, con dos prácticas por etapa como valor inicial. Ingrese el porcentaje obtenido en cada práctica; si no asistió a alguna y no la recuperó, marque «No asistí».</p>
-          </div>
-          <div class="grupo solo-lab" hidden>
-            <label class="ancho">Ponderación del laboratorio en cada etapa (%)
-              <input type="number" id="peso-lab" min="15" max="50" step="any" value="15" inputmode="decimal">
-            </label>
-            <p class="ayuda">Figura en el Planeamiento de la Asignatura. El mínimo es 15% (Art. 12, inc. f). La calculadora lo aplica sobre el total de la etapa, dentro del 50% que corresponde a las actividades de proceso.</p>
-          </div>
-        </fieldset>
-
-        <fieldset>
-          <legend>Examen final</legend>
-          <div class="grupo">
-            <label class="ancho">Puntaje total del examen final
-              <input type="number" id="final-total" min="1" step="any" value="100" inputmode="decimal">
-            </label>
-            <p class="ayuda">Se usa para expresar en puntos el mínimo necesario para cada calificación.</p>
-          </div>
-          <div class="grupo">
-            <label class="ancho">Porcentaje obtenido en el recuperatorio (%) <span class="opcional">(opcional)</span>
-              <input type="number" id="recuperatorio" min="0" max="100" step="any" inputmode="decimal">
-            </label>
-            <p class="ayuda">Solo para quienes deben recuperar un parcial. El recuperatorio es el examen de la primera convocatoria del final; ingrese aquí el porcentaje obtenido, o uno estimado, para ver si habilita la segunda convocatoria.</p>
-          </div>
-        </fieldset>
-
-        <div id="errores" class="errores" role="alert" hidden></div>
-
-        <div class="acciones">
-          <button type="submit" class="boton">Calcular</button>
-          <button type="reset" class="boton secundario">Limpiar</button>
-        </div>
-      </form>
-
-      <div id="resultado" class="resultado" aria-live="polite" tabindex="-1"></div>
-
-      <details class="supuestos">
-        <summary>Criterios que aplica la calculadora</summary>
-        <ul>
-          <li><strong>Redondeo del PEP.</strong> El PEP se redondea al entero más próximo (por ejemplo, 59,5% pasa a 60%). El reglamento menciona el redondeo solo para el Rendimiento Porcentual (Art. 15, inc. c), por lo que la calculadora muestra una advertencia cuando el resultado depende del redondeo.</li>
-          <li><strong>Recuperatorio.</strong> La nota del recuperatorio reemplaza a la del parcial recuperado y con ella se vuelve a calcular el PEP.</li>
-          <li><strong>Actividades sumativas.</strong> Todas las actividades de una etapa tienen el mismo peso entre sí. Si en su asignatura tienen puntajes distintos, el resultado puede variar levemente.</li>
-          <li><strong>Laboratorio.</strong> Todas las prácticas de una etapa tienen el mismo peso entre sí. La ponderación indicada se aplica sobre el total de la etapa. Si en su asignatura se calcula de otra forma, el resultado puede variar.</li>
-          <li><strong>Otros requisitos.</strong> La calculadora no verifica sanciones disciplinarias ni los requisitos propios de cada asignatura (Art. 13, inc. b, núms. 4 y 5).</li>
-        </ul>
-      </details>
-    </section>
   </main>
 
   <footer class="pie">
