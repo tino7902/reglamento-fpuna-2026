@@ -204,6 +204,9 @@
         var puntos = Math.ceil(Math.round(rec.minimo / 100 * finalTotal * 1e6) / 1e6);
         return { clase: 'alerta', titulo: 'Debe rendir recuperatorio',
           texto: [motivo + ' Puede recuperar el ' + parcial + '.',
+                  rec.tipo === 'ausencia'
+                    ? 'Por tratarse de una ausencia, no se exige el 60% en las actividades de proceso de esa etapa.'
+                    : 'Cumple el requisito para recuperar: en las actividades de proceso de esa etapa obtuvo ' + pct(rec.procesoPct) + ', y el mínimo exigido es 60%.',
                   'El recuperatorio es el examen de la primera convocatoria del final: mismos temas, mismo día, hora y sala. La nota que obtenga reemplaza a la del ' + parcial + ' y se vuelve a calcular el PEP. Si el nuevo PEP llega al 60%, queda habilitado para rendir el examen final en la segunda convocatoria.',
                   '<span class="destacado">Mínimo necesario en el recuperatorio: ' + pct(rec.minimo) + ' (' + num(puntos) + ' de ' + num(finalTotal) + ' puntos).</span>'] };
       case 'recuperatorio_inalcanzable':
